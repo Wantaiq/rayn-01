@@ -2,20 +2,24 @@ import jwt from 'jsonwebtoken';
 import type { User } from '../types/user';
 import bcrypt from 'bcrypt';
 
-const createJWT = ({ id, username }: User) => {
+const createJWT = (user: User) => {
+  const { id, username } = user;
   const token = jwt.sign(
     {
       id,
       username,
     },
-    process.env.JWT_SECRET,
+    process.env.JWT_SECRET as string,
   );
 
   return token;
 };
 
 const verifyJWT = (token: string) => {
-  const user = jwt.verify(token, process.env.JWT_SECRET);
+  const user = jwt.verify(
+    token,
+    process.env.JWT_SECRET as string,
+  );
   return user;
 };
 
