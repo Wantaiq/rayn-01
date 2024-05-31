@@ -9,3 +9,60 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id           String        @id @default(uuid())
+  username     String        @unique @db.VarChar(255)
+  createdAt    DateTime      @default(now())
+  email        String        @unique @db.VarChar(255)
+  password     String        @db.VarChar(255)
+  projects     Project[]
+  pages        Page[]
+  layoutBlocks LayoutBlock[]
+}
+
+model Project {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  ownerId   String
+  owner     User     @relation(fields: [ownerId], references: [id])
+  name      String   @db.VarChar(255)
+  pages     Page[]
+}
+
+model Page {
+  id            String        @id @default(uuid())
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime?
+  userId        String
+  updatedBy     User          @relation(fields: [userId], references: [id])
+  name          String        @db.VarChar(255)
+  projectId     String
+  project       Project       @relation(fields: [projectId], references: [id])
+  contentBlocks LayoutBlock[]
+}
+
+model LayoutBlock {
+  id           String         @id @default(uuid())
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime?
+  userId       String
+  updatedBy    User           @relation(fields: [userId], references: [id])
+  name         String         @db.VarChar(255)
+  type         String         @db.VarChar(255)
+  option       String         @db.VarChar(255)
+  pageId       String
+  page         Page           @relation(fields: [pageId], references: [id])
+  contentBlocks ContentBlock[]
+}
+
+model ContentBlock {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime?
+  name          String      @db.VarChar(255)
+  type          String      @db.VarChar(255)
+  option        String      @db.VarChar(255)
+  layoutBlockId String
+  layoutBlock   LayoutBlock @relation(fields: [layoutBlockId], references: [id])
+}
