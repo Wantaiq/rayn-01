@@ -1,13 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
+import type { RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
-import { ResponseError } from '../utils';
+import { ResponseError, tryCatch } from '../utils';
 
-const handleInputErrors = (
-  req: Request,
-  _res: Response,
-  next: NextFunction,
-) => {
-  try {
+const handleInputErrors: RequestHandler = tryCatch(
+  (req, _res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -15,9 +11,7 @@ const handleInputErrors = (
     }
 
     next();
-  } catch (error) {
-    next(error);
-  }
-};
+  },
+);
 
 export default handleInputErrors;
