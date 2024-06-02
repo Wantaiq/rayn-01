@@ -20,6 +20,7 @@ const verifyJWT = (token: string) => {
     token,
     process.env.JWT_SECRET as string,
   );
+
   return user;
 };
 
