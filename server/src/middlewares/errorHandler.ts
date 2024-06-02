@@ -1,15 +1,10 @@
-import {
-  type NextFunction,
-  type Request,
-  type Response,
-} from 'express';
+import { type Request, type Response } from 'express';
 import { ResponseError } from '../utils';
 
 const errorHandler = (
   err: unknown,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   if (err instanceof ResponseError) {
     res.status(err.statusCode);
@@ -25,6 +20,7 @@ const errorHandler = (
   res.json({
     message: 'Something went wrong.',
   });
+
   return;
 };
 
