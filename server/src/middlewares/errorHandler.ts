@@ -1,10 +1,15 @@
-import { type Request, type Response } from 'express';
+import {
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express';
 import { ResponseError } from '../utils';
 
 const errorHandler = (
   err: unknown,
   _req: Request,
   res: Response,
+  _next: NextFunction,
 ) => {
   if (err instanceof ResponseError) {
     res.status(err.statusCode);
