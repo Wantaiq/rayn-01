@@ -14,7 +14,8 @@
   "dependencies": {
     "class-variance-authority": "^0.7.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.5"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.5.0",
