@@ -29,16 +29,11 @@ const input = cva(
 );
 
 const labelClasses = cva(
-  [
-    'text-light',
-    'peer-focus:text-primary',
-    'order-1',
-    'peer-invalid:text-danger',
-  ],
+  ['text-light', 'peer-focus:text-primary', 'order-1'],
   {
     variants: {
       error: {
-        true: ['text-danger'],
+        true: ['!text-danger'],
       },
     },
   },
