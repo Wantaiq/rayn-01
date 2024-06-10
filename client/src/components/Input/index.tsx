@@ -29,33 +29,22 @@ const input = cva(
 );
 
 const labelClasses = cva(
-  [
-    'text-light',
-    'peer-focus:text-primary',
-    'order-1',
-    'peer-invalid:text-danger',
-  ],
+  ['text-light', 'peer-focus:text-primary', 'order-1'],
   {
     variants: {
       error: {
-        true: ['text-danger'],
+        true: ['!text-danger'],
       },
     },
   },
 );
 
 const wrapperClasses = cva(
-  [
-    'flex',
-    'justify-center',
-    'content-center',
-    'gap-1.5',
-    'w-fit',
-  ],
+  ['flex', 'justify-center', 'gap-1.5', 'w-fit'],
   {
     variants: {
       inline: {
-        true: ['flex-row'],
+        true: ['flex-row', 'items-center'],
         false: ['flex-col'],
       },
       full: {
