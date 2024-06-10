@@ -45,17 +45,11 @@ const labelClasses = cva(
 );
 
 const wrapperClasses = cva(
-  [
-    'flex',
-    'justify-center',
-    'content-center',
-    'gap-1.5',
-    'w-fit',
-  ],
+  ['flex', 'justify-center', 'gap-1.5', 'w-fit'],
   {
     variants: {
       inline: {
-        true: ['flex-row'],
+        true: ['flex-row', 'items-center'],
         false: ['flex-col'],
       },
       full: {
