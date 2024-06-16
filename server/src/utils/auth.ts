@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
 import ResponseError from './ResponseError';
@@ -12,14 +12,14 @@ const generateAccessTokens = async (
       id,
       username,
     },
-    process.env.JWT_ACCESS_TOKEN_SECRET as string,
-    { expiresIn: '15m' },
+    process.env.JWT_ACCESS_TOKEN_SECRET as Secret,
+    { expiresIn: process.env.JWT_ACCESS_TOKEN_DURATION },
   );
 
   const refreshToken = jwt.sign(
     { id },
-    process.env.JWT_REFRESH_TOKEN_SECRET as string,
-    { expiresIn: '1d' },
+    process.env.JWT_REFRESH_TOKEN_SECRET as Secret,
+    { expiresIn: process.env.JWT_REFRESH_TOKEN_DURATION },
   );
 
   return { accessToken, refreshToken };
@@ -28,7 +28,7 @@ const generateAccessTokens = async (
 const verifyAccessToken = async (token: string) => {
   const user = jwt.verify(
     token,
-    process.env.JWT_ACCESS_TOKEN_SECRET as string,
+    process.env.JWT_ACCESS_TOKEN_SECRET as Secret,
     (err, _) => {
       if (err) {
         throw new ResponseError(403, 'Invalid token', 403);
