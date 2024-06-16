@@ -1,1 +1,6 @@
-export { register, login, refreshToken } from './auth';
+export {
+  register,
+  login,
+  logout,
+  refreshToken,
+} from './auth';
