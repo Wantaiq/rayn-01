@@ -217,7 +217,7 @@ const refreshToken: RequestHandler = async (
             maxAge: 24 * 60 * 60 * 1000,
           });
           res.json({
-            accessToken: newTokens.accessToken,
+            token: newTokens.accessToken,
             id: user.id,
             username: user.id,
           });
