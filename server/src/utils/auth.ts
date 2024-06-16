@@ -1,24 +1,39 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
+import ResponseError from './ResponseError';
 
-const createJWT = (user: User) => {
+const generateAccessTokens = async (
+  user: Pick<User, 'username' | 'id'>,
+) => {
   const { id, username } = user;
-  const token = jwt.sign(
+  const accessToken = jwt.sign(
     {
       id,
       username,
     },
-    process.env.JWT_SECRET as string,
+    process.env.JWT_ACCESS_TOKEN_SECRET as string,
+    { expiresIn: '15m' },
   );
 
-  return token;
+  const refreshToken = jwt.sign(
+    { id },
+    process.env.JWT_REFRESH_TOKEN_SECRET as string,
+    { expiresIn: '1d' },
+  );
+
+  return { accessToken, refreshToken };
 };
 
-const verifyJWT = (token: string) => {
+const verifyAccessToken = async (token: string) => {
   const user = jwt.verify(
     token,
-    process.env.JWT_SECRET as string,
+    process.env.JWT_ACCESS_TOKEN_SECRET as string,
+    (err, _) => {
+      if (err) {
+        throw new ResponseError(403, 'Invalid token', 403);
+      }
+    },
   );
 
   return user;
@@ -36,8 +51,8 @@ const comparePasswords = (
 };
 
 export {
-  createJWT,
-  verifyJWT,
+  generateAccessTokens,
+  verifyAccessToken,
   hashPassword,
   comparePasswords,
 };

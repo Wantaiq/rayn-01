@@ -1,6 +1,6 @@
 export {
-  createJWT,
-  verifyJWT,
+  generateAccessTokens,
+  verifyAccessToken,
   hashPassword,
   comparePasswords,
 } from './auth';
