@@ -92,6 +92,36 @@ const login: RequestHandler = async (req, res) => {
   return;
 };
 
+const logout: RequestHandler = async (req, res) => {
+  const cookies = req.cookies;
+
+  if (!cookies?.jwt) {
+    res.status(204);
+    res.json({ message: 'Logged out' });
+    return;
+  }
+
+  const refreshToken = cookies?.jwt;
+
+  const user = await getUserByRefreshToken(refreshToken);
+  if (user) {
+    const newUserRefreshTokens = user.tokens.filter(
+      (token) => token !== refreshToken,
+    );
+
+    await setRefreshTokens(user.id, newUserRefreshTokens);
+  }
+
+  res.clearCookie('jwt', {
+    httpOnly: true,
+    sameSite: 'none',
+    secure: true,
+  });
+
+  res.status(204);
+  res.json({ message: 'Logged out' });
+};
+
 const refreshToken: RequestHandler = async (
   req,
   res,
@@ -190,4 +220,4 @@ const refreshToken: RequestHandler = async (
   }
 };
 
-export { register, login, refreshToken };
+export { register, login, logout, refreshToken };
