@@ -26,11 +26,11 @@ const register: RequestHandler = async (req, res) => {
   }
 
   const newUser = await createNewUser(username, password);
-  const { accessToken } = await generateAccessTokens(
-    newUser,
-  );
 
-  res.json({ accessToken });
+  res.json({
+    message: 'Successfully created user.',
+    id: newUser.id,
+  });
   return;
 };
 
