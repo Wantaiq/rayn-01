@@ -1,6 +1,10 @@
 import { Router } from 'express';
 import { tryCatch } from '../utils';
-import { login, register } from '../controllers';
+import {
+  login,
+  refreshToken,
+  register,
+} from '../controllers';
 import { handleInputErrors } from '../middlewares';
 import { authSchema } from '../schemas';
 import { checkSchema } from 'express-validator';
@@ -21,4 +25,5 @@ authRoutes.post(
   tryCatch(login),
 );
 
+authRoutes.get('/refresh', tryCatch(refreshToken));
 export default authRoutes;
