@@ -11,7 +11,7 @@ import {
   generateAccessTokens,
   ResponseError,
 } from '../utils';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 
 const register: RequestHandler = async (req, res) => {
   const { username, password } = req.body;
@@ -121,7 +121,7 @@ const refreshToken: RequestHandler = async (
   if (!user) {
     jwt.verify(
       refreshToken,
-      process.env.JWT_REFRESH_TOKEN_SECRET as string,
+      process.env.JWT_REFRESH_TOKEN_SECRET as Secret,
       async (err: any, decoded: any) => {
         try {
           if (err) {
@@ -145,7 +145,7 @@ const refreshToken: RequestHandler = async (
   } else {
     jwt.verify(
       refreshToken,
-      process.env.JWT_REFRESH_TOKEN_SECRET as string,
+      process.env.JWT_REFRESH_TOKEN_SECRET as Secret,
       async (err: any, decoded: any) => {
         try {
           if (err) {
