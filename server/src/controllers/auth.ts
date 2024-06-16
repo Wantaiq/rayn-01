@@ -30,6 +30,7 @@ const register: RequestHandler = async (req, res) => {
   res.json({
     message: 'Successfully created user.',
     id: newUser.id,
+    username: newUser.username,
   });
   return;
 };
@@ -87,7 +88,11 @@ const login: RequestHandler = async (req, res) => {
     secure: true,
     maxAge: 24 * 60 * 60 * 1000,
   });
-  res.json({ accessToken });
+  res.json({
+    token: accessToken,
+    id: user.id,
+    username: user.username,
+  });
 
   return;
 };
@@ -211,7 +216,11 @@ const refreshToken: RequestHandler = async (
             secure: true,
             maxAge: 24 * 60 * 60 * 1000,
           });
-          res.json({ accessToken: newTokens.accessToken });
+          res.json({
+            accessToken: newTokens.accessToken,
+            id: user.id,
+            username: user.id,
+          });
         } catch (error) {
           next(error);
         }
