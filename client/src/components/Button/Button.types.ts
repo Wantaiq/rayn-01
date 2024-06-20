@@ -11,7 +11,7 @@ type ButtonOptions = {
     | 'warning'
     | 'success'
     | 'plain';
-  size?: 'small' | 'medium' | 'large' | 'full';
+  size?: 'small' | 'medium' | 'large' | 'full' | 'xLarge';
   underline?: boolean;
   rounded?: boolean;
   inline?: boolean;
