@@ -11,6 +11,10 @@ async function createNewUser(
       username: username,
       password: await hashPassword(password),
     },
+    select: {
+      id: true,
+      username: true,
+    },
   });
 
   return user;
@@ -28,4 +32,67 @@ async function getUserByUsername(
   return user;
 }
 
-export { createNewUser, getUserByUsername };
+async function getUserByRefreshToken(token: string) {
+  const user = await prisma.user.findFirst({
+    where: {
+      tokens: {
+        has: token,
+      },
+    },
+    select: {
+      id: true,
+      username: true,
+      tokens: true,
+    },
+  });
+
+  return user;
+}
+
+async function clearRefreshTokens(
+  id: Prisma.UserUpdateArgs['where']['id'],
+) {
+  const user = await prisma.user.update({
+    where: {
+      id: id,
+    },
+    data: {
+      tokens: [],
+    },
+    select: {
+      username: true,
+      id: true,
+    },
+  });
+
+  return user;
+}
+
+async function setRefreshTokens(
+  id: Prisma.UserUpdateArgs['where']['id'],
+  refreshTokens: string[],
+) {
+  const user = await prisma.user.update({
+    where: {
+      id: id,
+    },
+    data: {
+      tokens: refreshTokens,
+    },
+    select: {
+      username: true,
+      id: true,
+      tokens: true,
+    },
+  });
+
+  return user;
+}
+
+export {
+  createNewUser,
+  getUserByUsername,
+  getUserByRefreshToken,
+  clearRefreshTokens,
+  setRefreshTokens,
+};
