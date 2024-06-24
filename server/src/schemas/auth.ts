@@ -12,6 +12,9 @@ const authSchema: Schema = {
     notEmpty: true,
     isLength: { options: { min: 8 } },
     isString: true,
+    matches: {
+      options: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/,
+    },
   },
 };
 

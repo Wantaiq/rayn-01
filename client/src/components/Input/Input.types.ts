@@ -8,7 +8,7 @@ export type InputProps = {
   id?: string;
   label?: string;
   inline?: boolean;
-  full: boolean;
+  full?: boolean;
   error?: boolean;
   type?: 'text' | 'password' | 'email';
   className?: string;

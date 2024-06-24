@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:8080',
+  origin: process.env.FRONTEND_URL,
   optionsSuccessStatus: 200,
 };
 

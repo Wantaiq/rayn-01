@@ -69,7 +69,7 @@ const login: RequestHandler = async (req, res) => {
   if (req.cookies?.jwt) {
     res.clearCookie('jwt', {
       httpOnly: true,
-      sameSite: 'none',
+      sameSite: 'strict',
       secure: true,
     });
   }
@@ -84,7 +84,7 @@ const login: RequestHandler = async (req, res) => {
 
   res.cookie('jwt', refreshToken, {
     httpOnly: true,
-    sameSite: 'none',
+    sameSite: 'strict',
     secure: true,
     maxAge: 24 * 60 * 60 * 1000,
   });
@@ -119,7 +119,7 @@ const logout: RequestHandler = async (req, res) => {
 
   res.clearCookie('jwt', {
     httpOnly: true,
-    sameSite: 'none',
+    sameSite: 'strict',
     secure: true,
   });
 
@@ -144,7 +144,7 @@ const refreshToken: RequestHandler = async (
   const refreshToken = cookies.jwt;
   res.clearCookie('jwt', {
     httpOnly: true,
-    sameSite: 'none',
+    sameSite: 'strict',
     secure: true,
   });
 
@@ -212,7 +212,7 @@ const refreshToken: RequestHandler = async (
 
           res.cookie('jwt', newTokens.refreshToken, {
             httpOnly: true,
-            sameSite: 'none',
+            sameSite: 'strict',
             secure: true,
             maxAge: 24 * 60 * 60 * 1000,
           });

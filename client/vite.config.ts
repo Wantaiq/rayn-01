@@ -13,6 +13,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src/'),
       components: `${path.resolve(__dirname, './src/components/')}`,
       types: `${path.resolve(__dirname, './src/types/')}`,
+      context: `${path.resolve(__dirname, './src/context/')}`,
+      hooks: `${path.resolve(__dirname, './src/hooks/')}`,
     },
   },
 });
