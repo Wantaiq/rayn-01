@@ -12,7 +12,7 @@ const FormInput: FormInputComponent = ({
   const hasErrors = errors && errorMessage ? true : false;
 
   return (
-    <>
+    <div className='flex flex-col space-y-1 items-center justify-center'>
       <Input
         {...restProps}
         {...register(name, rules)}
@@ -20,12 +20,14 @@ const FormInput: FormInputComponent = ({
         aria-invalid={hasErrors}
         error={hasErrors}
       />
-      {hasErrors && (
-        <p className='text-red-500'>
-          {errorMessage?.message}
-        </p>
-      )}
-    </>
+      <div className='h-5 self-start'>
+        {hasErrors && (
+          <p className='text-red-500 text-sm leading-tight h-5'>
+            {errorMessage?.message}
+          </p>
+        )}
+      </div>
+    </div>
   );
 };
 
