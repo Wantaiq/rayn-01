@@ -55,7 +55,7 @@ const button = cva(
         false: [],
       },
       inline: {
-        true: ['inline-block'],
+        true: ['!inline'],
         false: [],
       },
       disabled: {
