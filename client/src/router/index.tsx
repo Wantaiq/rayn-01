@@ -1,4 +1,4 @@
-import { Register } from '@/pages';
+import { Register, Login } from '@/pages';
 import {
   createBrowserRouter,
   type RouteObject,
@@ -13,6 +13,10 @@ const Router = () => {
         {
           path: 'register',
           element: <Register />,
+        },
+        {
+          path: 'login',
+          element: <Login />,
         },
       ],
     },
