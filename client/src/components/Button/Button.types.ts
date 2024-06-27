@@ -12,7 +12,13 @@ type ButtonOptions = {
     | 'warning'
     | 'success'
     | 'plain';
-  size?: 'small' | 'medium' | 'large' | 'full' | 'xLarge';
+  size?:
+    | 'small'
+    | 'medium'
+    | 'large'
+    | 'full'
+    | 'xLarge'
+    | 'neutral';
   underline?: boolean;
   rounded?: boolean;
   inline?: boolean;

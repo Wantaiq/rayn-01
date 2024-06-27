@@ -48,7 +48,13 @@ const meta: Meta<typeof Button> = {
       },
     },
     size: {
-      options: ['small', 'medium', 'large'],
+      options: [
+        'small',
+        'medium',
+        'large',
+        'xLarge',
+        'neutral',
+      ],
       control: 'select',
       table: {
         type: {
