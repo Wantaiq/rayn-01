@@ -44,6 +44,7 @@ const button = cva(
         medium: ['px-4', 'py-2', 'text-base'],
         large: ['px-4', 'py-2', 'text-lg'],
         xLarge: ['px-4', 'py-1.5', 'text-xl'],
+        neutral: [],
         full: ['w-full'],
       },
       underline: {
@@ -55,7 +56,7 @@ const button = cva(
         false: [],
       },
       inline: {
-        true: ['inline-block'],
+        true: ['!inline'],
         false: [],
       },
       disabled: {

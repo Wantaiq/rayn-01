@@ -8,7 +8,7 @@ type AsProp<E extends ElementType> = {
 };
 
 type PropTypes<E extends ElementType, P> = P &
-  Omit<ComponentPropsWithoutRef<E>, keyof P>;
+  Omit<ComponentPropsWithoutRef<E>, keyof P | 'as'>;
 
 type PolymorphicComponent<
   Component extends ElementType,
